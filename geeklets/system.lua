@@ -60,7 +60,7 @@ if avail < 50 then
 elseif avail < 75 then
     tailColor = { list = "ansiTerminalColors", name = "fgYellow" }
 end
-cpuGuage = cpuGuage .. styledtext.new(" " .. tostring(avail) .. "% utilization\n", { font = baseFont, color = tailColor })
+cpuGuage = cpuGuage .. styledtext.new(" " .. tostring(avail) .. "% utilisation\n", { font = baseFont, color = tailColor })
 
 -- RAM Usage
 
