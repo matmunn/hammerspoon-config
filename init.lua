@@ -1,17 +1,4 @@
-dofile("hs/_asm/disks/init.lua")
-
-_asm = {}
-local requirePlus = require("utils.require")
-
-_asm._actions = requirePlus.requirePath("utils._actions")
-
-print(_asm._actions)
-
-dofile("geekery.lua")
-
 hyper = {"cmd", "ctrl", "alt"}
-laptopScreen = "Color LCD"
-workScreen = "U2879G6"
 
 hs.grid.ui.textSize = 50
 
@@ -131,7 +118,7 @@ function moveLeftThird()
 
     f.x = max.x
     f.y = max.y
-    f.w = max.w * 3/8
+    f.w = max.w * 1/3
     f.h = max.h
     win:setFrame(f)
 end
@@ -142,9 +129,9 @@ function moveMiddleThird()
     local screen = win:screen()
     local max = screen:frame()
 
-    f.x = max.x + (max.w * 3/8)
+    f.x = max.x + (max.w * 1/3)
     f.y = max.y
-    f.w = max.w * 3/8
+    f.w = max.w * 1/3
     f.h = max.h
     win:setFrame(f)
 end
@@ -155,9 +142,22 @@ function moveRightThird()
     local screen = win:screen()
     local max = screen:frame()
 
-    f.x = max.x + ((max.w * 3/8) * 2)
+    f.x = max.x + (max.w * 2/3)
     f.y = max.y
-    f.w = max.w * 2/8
+    f.w = max.w * 1/3
+    f.h = max.h
+    win:setFrame(f)
+end
+
+function moveRightTwoThirds()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+
+    f.x = max.x + (max.w * 1/3)
+    f.y = max.y
+    f.w = max.w * 2/3
     f.h = max.h
     win:setFrame(f)
 end
@@ -168,7 +168,7 @@ function moveRightThirdTopHalf()
     local screen = win:screen()
     local max = screen:frame()
 
-    f.x = max.x + ((max.w * 3/8) * 2)
+    f.x = max.x + (max.w * 2/3)
     f.y = max.y
     f.w = max.w * 2/8
     f.h = max.h / 2
@@ -211,6 +211,17 @@ function moveMiddleThirdBottomHalf()
     f.y = max.h / 2
     f.w = max.w * 3/8
     f.h = max.h / 2
+    win:setFrame(f)
+end
+
+function moveCentreScreen()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+
+    f.x = (max.w - f.w) / 2
+    f.y = (max.h - f.h) / 2
     win:setFrame(f)
 end
 
@@ -284,7 +295,10 @@ hs.hotkey.bind(hyper, "J", function()
     moveRightThird()
 end)
 hs.hotkey.bind(hyper, "N", function()
-    moveRightThirdBottomHalf()
+    moveRightTwoThirds()
+end)
+hs.hotkey.bind(hyper, "Y", function()
+    moveCentreScreen()
 end)
 hs.hotkey.bind(hyper, "Pad4", function()
     local win = hs.window.focusedWindow()
